@@ -92,14 +92,14 @@ sed -i -e 's/.fq/.fastq/g' -e 's/_1.fastq/_R1.fastq/g' -e 's/_2.fastq/_R2.fastq/
 #### See Example script. 
 
 #### Include a path to SCR
-export SCR="/global/scratch/users/sfawcett"
+export SCR="/path/to/directory/"
 
 #### Conda should be activated and deactivated within the batch script to avoid problems. 
-source /global/home/users/sfawcett/miniconda3/etc/profile.d/conda.sh
+source /path/to/directory/miniconda3/etc/profile.d/conda.sh
 conda activate SORTER2
 
 #### Include path to a single master version of scripts (these need not be modified; all necessary file names and other changes can be made to batch scripts for each project using the pipeline)
-python /global/scratch/users/akostic/sorter/bin/1a.py -n Pritchardia -trim T -spades T
+python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
  
 
 
