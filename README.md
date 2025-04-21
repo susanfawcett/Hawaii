@@ -100,6 +100,10 @@ conda activate SORTER2
 
 #### Include path to a single master version of scripts (these need not be modified; all necessary file names and other changes can be made to batch scripts for each project using the pipeline)
 python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
+
+### Use Haplominer to assembly align off-target reads to reference plastome
+
+
  
 
 
