@@ -6,63 +6,37 @@ See https://github.com/JonasMendez/SORTER2 for tutorials and detailed explanatio
 ### List of Jonas Mendez-Reneau scripts
 
 SORTER2_FormatReads.py
-
 SORTER2_HaplOMiner.py
-
 SORTER2_Processor.py
-
 SORTER2_ProgenitorProcessor.py
-
 SORTER2_Stage1A_TrimSPAdes.py
-
 SORTER2_Stage1B_AssembleOrthologs.py
-
 SORTER2_Stage2_PhaseOrthologs.py
-
 SORTER2_Stage3_PhaseHybrids.py
-
 example_shell.sh
 
 ### List of our Modified Scripts
 
 1a.py
-
 1b_pre_mafft.py 
-
 1b_mafft.py  
-
 1b_post_mafft.py  
-
 2pre_bwa.py   
-
 2bwa.py
-
 2post_bwa.py
-
 2end_mafft.py
-
 3pre_mafft.py
-
 3mafft.py
-
 3post_mafft.py
-
-
 hap1.py
-
 hap2.py
 
-
 proc_snps.py
-
 proc1.py
-
 proc2.py
-
 
 ### Install SORTER2
 wget https://raw.githubusercontent.com/JonasMendez/SORTER2/refs/heads/main/SORTER2.yml
-
 
 ### Prepare paired read files and CSV to run python script SORTER2_FormatReads.py
 
@@ -98,7 +72,7 @@ export SCR="/path/to/directory/"
 source /path/to/directory/miniconda3/etc/profile.d/conda.sh
 conda activate SORTER2
 
-#### Include path to a single master version of scripts (these need not be modified; all necessary file names and other changes can be made to batch scripts for each project using the pipeline).
+#### Include path to a single master version of scripts (these need not be modified; all necessary file names and other changes can be made to batch scripts for each project using the pipeline). Our versions are broken into more steps to enable multithreading on Savio where possible.
 python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
 
 ### Use Hapl-O-Miner to assemble off-target reads to reference plastome
@@ -114,7 +88,7 @@ for dir in /global/scratch/users/sfawcett/SORTER2/Pritchardia/Raw/SORTER2_Pritch
   fi
 done
 
-####  Use filenames as headers for mafft (they will carry the name of the reference they were mapped too and are truncated)
+#### Use filenames as headers for mafft (they otherwise will carry the name of the reference they were mapped too and are truncated)
 bash plastafastomerename.sh
 
 #### Combine all assemblies into a single fasta file 
@@ -124,15 +98,20 @@ cat *.fasta > all_loulu_plastomes_unaligned.fasta
 Batch script
 mafft --thread 40 --auto --keeplength --add "$ASSEMBLY" "$REFERENCE" > "$OUTPUT_DIR/aligned_plastomes.fasta"
 
-
 #### Sequences represented by less than 50% of columns were removed
-
+python trim_by_coverage_0.5.py
 
 #### Summary statistics were used to evaluate different trimming strategies
+python summarize_alignment.py
 
 #### TrimAL was used to generate final alignments
+For _Pritchardia_
+trimal -in trimmed_alignment_50percent.fasta -out trimmed_strictplus.fasta -strictplus 
+For _Lysimachia_
+trimal -in trimmed_alignment_50percent.fasta -out trimmed_alignment_gappyout.fasta -gappyout 
 
 #### Plastome Phylogenies were inferred using IQTree
+
 
 
 
