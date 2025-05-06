@@ -116,7 +116,7 @@ trimal -in trimmed_alignment_50percent.fasta -out trimmed_alignment_gappyout.fas
 Batch script IQTreeLouluPlastome.bat
   iqtree3 -s $ALIGNMENT_FILE -m TEST -bb 1000 -T AUTO -safe --prefix louluplastome
 
-### Run Stage 1B
+### Run SORTER2 Stage 1B
 Broken into three steps to faciliate multithreading on Savio
 
 
