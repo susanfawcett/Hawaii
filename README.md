@@ -61,7 +61,6 @@ sed -i '1s/^\xEF\xBB\xBF//' Your_samples.csv
 #### Edit .CSV file to match directory file names
 sed -i -e 's/.fq/.fastq/g' -e 's/_1.fastq/_R1.fastq/g' -e 's/_2.fastq/_R2.fastq/g' Your_samples.csv
 
-
 ### Format Batch Script
 #### See Example script. 
 
@@ -95,7 +94,7 @@ bash plastafastomerename.sh
 cat *.fasta > all_loulu_plastomes_unaligned.fasta
 
 #### Resulting assemblies were aligned to the reference using Mafft
-Batch script
+Batch script MafftPritchardiaPlastome.bat
 mafft --thread 40 --auto --keeplength --add "$ASSEMBLY" "$REFERENCE" > "$OUTPUT_DIR/aligned_plastomes.fasta"
 
 #### Sequences represented by less than 50% of columns were removed
@@ -111,6 +110,10 @@ For _Lysimachia_
 trimal -in trimmed_alignment_50percent.fasta -out trimmed_alignment_gappyout.fasta -gappyout 
 
 #### Plastome Phylogenies were inferred using IQTree
+Batch script IQTreeLouluPlastome.bat
+  iqtree3 -s $ALIGNMENT_FILE -m TEST -bb 1000 -T AUTO -safe --prefix louluplastome
+  
+
 
 
 
