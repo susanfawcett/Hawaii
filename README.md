@@ -38,7 +38,8 @@ proc2.py
 ### Install SORTER2
 wget https://raw.githubusercontent.com/JonasMendez/SORTER2/refs/heads/main/SORTER2.yml
 
-### Prepare paired read files and CSV to run python script SORTER2_FormatReads.py
+### Prepare paired read files and CSV to run python script 
+Use SORTER2_FormatReads.py
 
 #### Rename files ending in .fq with .fastq 
 for f in *.fq; do
@@ -89,20 +90,20 @@ for dir in /global/scratch/users/sfawcett/SORTER2/Pritchardia/Raw/SORTER2_Pritch
   fi
 done
 
-#### Use filenames as headers for mafft (they otherwise will carry the name of the reference they were mapped too and are truncated)
+#### Use filenames as headers for mafft (they otherwise will carry the name of the reference they were mapped to and are truncated)
 bash plastafastomerename.sh
 
 #### Combine all assemblies into a single fasta file 
 cat *.fasta > all_loulu_plastomes_unaligned.fasta
 
-#### Resulting assemblies were aligned to the reference using Mafft
+#### Align assemblies to the reference using Mafft
 Batch script MafftPritchardiaPlastome.bat
 mafft --thread 40 --auto --keeplength --add "$ASSEMBLY" "$REFERENCE" > "$OUTPUT_DIR/aligned_plastomes.fasta"
 
-#### Sequences represented by less than 50% of columns were removed
+#### Remove sequences with less than 50% reference coverage
 python trim_by_coverage_0.5.py
 
-#### Summary statistics were used to evaluate different trimming strategies
+#### Summary statistics can be used to evaluate different trimming strategies
 python summarize_alignment.py
 
 #### TrimAL was used to generate final alignments
