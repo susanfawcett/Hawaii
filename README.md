@@ -98,10 +98,28 @@ export SCR="/path/to/directory/"
 source /path/to/directory/miniconda3/etc/profile.d/conda.sh
 conda activate SORTER2
 
-#### Include path to a single master version of scripts (these need not be modified; all necessary file names and other changes can be made to batch scripts for each project using the pipeline)
+#### Include path to a single master version of scripts (these need not be modified; all necessary file names and other changes can be made to batch scripts for each project using the pipeline).
 python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
 
 ### Use Haplominer to assembly align off-target reads to reference plastome
+#### Reference plastomes were used for Pritchardia pacifica, NCBI reference NC_067842.1 and Lysimachia clethroides, NCBI reference  NC_064345.1, downloaded from GenBank.
+
+haplominer script
+
+### Resulting assemblies were aligned to the reference using Mafft
+script
+
+### Assemblies were renamed according to the file name 
+script
+
+### Sequences represented by less than 50% of columns were removed
+
+### Summary statistics were used to evaluate different trimming strategies
+
+### TrimAL was used to generate final alignments
+
+### Plastome Phylogenies were inferred using IQTree
+
 
 
  
