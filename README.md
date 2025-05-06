@@ -71,7 +71,9 @@ export SCR="/path/to/directory/"
 source /path/to/directory/miniconda3/etc/profile.d/conda.sh
 conda activate SORTER2
 
-#### Include path to a single master version of scripts (All necessary file names and other changes can be made to batch scripts for each project using the pipeline). Our versions are broken into more steps than the original SORTER2 verions to enable multithreading on Savio where possible.
+### Run SORTER2 Stage 1A
+Note: Include path to a single master version of python scripts. All necessary file names and other changes can be made to batch scripts for each project using the pipeline).
+Batch script 
 python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
 
 ### Use Hapl-O-Miner to assemble off-target reads to reference plastome
@@ -112,6 +114,10 @@ trimal -in trimmed_alignment_50percent.fasta -out trimmed_alignment_gappyout.fas
 #### Plastome Phylogenies were inferred using IQTree
 Batch script IQTreeLouluPlastome.bat
   iqtree3 -s $ALIGNMENT_FILE -m TEST -bb 1000 -T AUTO -safe --prefix louluplastome
+
+### Run Stage 1B
+Broken into three steps to faciliate multithreading on Savio
+
 
   
   
