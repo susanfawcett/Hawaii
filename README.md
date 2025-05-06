@@ -105,6 +105,17 @@ python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
 #### Reference plastomes were used for Pritchardia pacifica, NCBI reference NC_067842.1 and Lysimachia clethroides, NCBI reference  NC_064345.1, downloaded from GenBank.
 
 haplominer script
+### for all the folders ending in *assembly copy all files ending in *cp_final.fasta to /global/scratch/users/sfawcett/Haplominer/PritchardiaPlastomes
+ 
+for dir in /global/scratch/users/sfawcett/SORTER2/Pritchardia/Raw/SORTER2_Pritchardia/*assembly; do
+  if [ -d "$dir" ]; then
+    cp "$dir"/*cp_final.fasta /global/scratch/users/sfawcett/Haplominer/PritchardiaPlastomes/ 2>/dev/null
+  fi
+done
+
+## use script fastaplastomes.sh to rename files correctly then create single fasta for mafft
+
+cat *.fasta > all_loulu_plastomes_unaligned.fasta
 
 ### Resulting assemblies were aligned to the reference using Mafft
 script
