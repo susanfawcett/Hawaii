@@ -113,17 +113,17 @@ for dir in /global/scratch/users/sfawcett/SORTER2/Pritchardia/Raw/SORTER2_Pritch
   fi
 done
 
-## use script fastaplastomes.sh to rename files correctly then create single fasta for mafft
+###  Use filenames as headers for mafft (they will carry the name of the reference they were mapped too and are truncated)
+bash plastafastomerename.sh
 
+### Combine all assemblies into a single fasta file 
 cat *.fasta > all_loulu_plastomes_unaligned.fasta
 
 ### Resulting assemblies were aligned to the reference using Mafft
 script
 
-### Assemblies were renamed according to the file name 
-script
-
 ### Sequences represented by less than 50% of columns were removed
+
 
 ### Summary statistics were used to evaluate different trimming strategies
 
