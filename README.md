@@ -135,6 +135,32 @@ Output directory:
 ### Most necessary bioinformatics tools should already be in your Conda Environment; others can be installed
 conda create --name plastome_env --clone SORTER2
 conda activate plastome_env
+conda install -c bioconda bwa samtools bcftools fastp mafft -y
+
+### **1. Prepare the reference**
+
+Do this once to index the plastome:
+
+bash
+REF=/global/scratch/users/sfawcett/WGS/Venegasia_chloroplast_genome.fasta
+samtools faidx "$REF"
+bwa index "$REF"
+
+### **2. Prepare a list of samples
+
+Paired-end reads in a folder:
+
+READS=/global/scratch/users/sfawcett/WGS/ArborWGSMadieae
+OUT=/global/scratch/users/sfawcett/WGS/WGS_plastomes
+mkdir -p "$OUT"/{bam,vcf,consensus,logs,trim}
+
+ls "$READS"/*_R1.fastq | sed 's/_R1.fastq//' | xargs -n1 basename > "$OUT/samples.txt"
+
+cat "$OUT/samples.txt"
+
+### **3. SLURM script for mapping reads to reference, generating consensus sequences
+
+see script
 
 
 
