@@ -119,6 +119,26 @@ Batch script IQTreeLouluPlastome.bat
 ### Run SORTER2 Stage 1B
 Broken into three steps to faciliate multithreading on Savio
 
+## Using WGS Sequences to extract plastomes
+### Input csv file formatted into three columns with existing filename | collection ID | taxon
+python SORTER2_FormatReads.py -i ArborWGSMadieae.csv
+
+Reference plastome:
+/global/scratch/users/sfawcett/WGS/Venegasia_chloroplast_genome.fasta
+
+Reads directory:
+/global/scratch/users/sfawcett/WGS/WGSMadieae
+
+Output directory:
+/global/scratch/users/sfawcett/WGS/WGS_plastomes
+
+### Most necessary bioinformatics tools should already be in your Conda Environment; others can be installed
+conda create --name plastome_env --clone SORTER2
+conda activate plastome_env
+
+
+
+
 
   
   
