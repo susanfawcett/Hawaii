@@ -139,7 +139,7 @@ conda activate plastome_env
 
 conda install -c bioconda bwa samtools bcftools fastp mafft -y
 
-### 1. Prepare the reference**
+### 1. Prepare the reference
 Do this once to index the plastome:
 
 bash
