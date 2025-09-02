@@ -161,7 +161,7 @@ cat "$OUT/samples.txt"
 
 see script map_plastomes
 
-## 4. Combine consensus sequences after the run
+### 4. Combine consensus sequences after the run
 
 bash
 cat "$OUT/consensus"/*.fa > "$OUT/all_wgs_plastomes.fasta"
