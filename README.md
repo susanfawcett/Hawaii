@@ -134,7 +134,9 @@ Output directory:
 
 ### Create your Conda Environment, install bioinformatics tools
 conda create --name plastome_env --clone SORTER2
+
 conda activate plastome_env
+
 conda install -c bioconda bwa samtools bcftools fastp mafft -y
 
 ### 1. Prepare the reference**
@@ -159,7 +161,7 @@ cat "$OUT/samples.txt"
 
 ### 3. SLURM script for mapping reads to reference, generating consensus sequences
 
-see script map_plastomes
+see script map_plastomes_conda.slurm
 
 ### 4. Combine consensus sequences after the run
 
