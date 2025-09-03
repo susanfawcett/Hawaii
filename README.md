@@ -119,7 +119,7 @@ Batch script IQTreeLouluPlastome.bat
 ### Run SORTER2 Stage 1B
 Broken into three steps to faciliate multithreading on Savio
 
-## Extracting plastomes from WGS sequences
+## Extracting plastomes from WGS sequences using GetOrganelle
 ### Input csv file formatted into three columns with existing filename | collection ID | taxon
 python SORTER2_FormatReads.py -i ArborWGSMadieae.csv
 
@@ -133,45 +133,10 @@ Output directory:
 /global/scratch/users/sfawcett/WGS/WGS_plastomes
 
 ### Create your Conda Environment, install bioinformatics tools
-conda create --name plastome_env --clone SORTER2
+Follow steps on https://github.com/Kinggerm/GetOrganelle
 
-conda activate plastome_env
-
-conda install -c bioconda bwa samtools bcftools fastp mafft -y
-
-### 1. Prepare the reference
-Do this once to index the plastome:
-
-bash
-REF=/global/scratch/users/sfawcett/WGS/Venegasia_chloroplast_genome.fasta
-samtools faidx "$REF"
-bwa index "$REF"
-
-### 2. Prepare a list of samples
-
-Paired-end reads in a folder:
-
-READS=/global/scratch/users/sfawcett/WGS/ArborWGSMadieae
-OUT=/global/scratch/users/sfawcett/WGS/WGS_plastomes
-mkdir -p "$OUT"/{bam,vcf,consensus,logs,trim}
-
-ls "$READS"/*_R1.fastq | sed 's/_R1.fastq//' | xargs -n1 basename > "$OUT/samples.txt"
-
-cat "$OUT/samples.txt"
-
-### 3. SLURM script for mapping reads to reference, generating consensus sequences
-
-see script map_plastomes_conda.slurm
-
-### 4. Combine consensus sequences after the run
-
-bash
-cat "$OUT/consensus"/*.fa > "$OUT/all_wgs_plastomes.fasta"
-
-### 5. Align using Mafft
-
-mafft --auto --thread 8 "$OUT/all_wgs_plastomes.fasta" > "$OUT/all_wgs_plastomes.aln.fasta"
-
+### GetOrganelle 
+See shell script getorganelle.sh
 
 
 
