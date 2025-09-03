@@ -138,6 +138,10 @@ Follow steps on https://github.com/Kinggerm/GetOrganelle
 ### GetOrganelle 
 See shell script getorganelle.sh
 
+Jian-Jun Jin*, Wen-Bin Yu*, Jun-Bo Yang, Yu Song, Claude W. dePamphilis, Ting-Shuang Yi, De-Zhu Li. GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes. Genome Biology 21, 241 (2020). https://doi.org/10.1186/s13059-020-02154-5
+
+Venegesia carpesioides was used as a seed, default settings for embryophyta were used.
+
 
 
 
