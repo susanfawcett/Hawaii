@@ -142,6 +142,79 @@ Jian-Jun Jin*, Wen-Bin Yu*, Jun-Bo Yang, Yu Song, Claude W. dePamphilis, Ting-Sh
 
 Venegesia carpesioides was used as a seed, default settings for embryophyta were used.
 
+### Export gfa files to inspect in Bandage
+# Go to the output directory
+cd /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleOutput
+
+# Make a folder for renamed GFA files
+mkdir -p ../GFA_Files
+
+# Copy and rename GFAs + add a comment with the sample name inside
+for d in */; do
+    sample=$(basename "$d")
+    gfa=$(find "$d" -maxdepth 1 -name "*.gfa" | head -n 1)
+    if [[ -n "$gfa" ]]; then
+        # Copy with new name
+        cp "$gfa" "../GFA_Files/${sample}.gfa"
+        # Add sample name as first line in the GFA
+        sed -i "1i# Sample: ${sample}" "../GFA_Files/${sample}.gfa"
+        # Append to samples list
+        echo "$sample" >> ../GFA_Files/samples_list.txt
+    fi
+done
+
+# Move to the GFA folder
+cd ../GFA_Files
+
+# Zip everything up into one archive
+tar -czf ../GFA_Files.tar.gz *.gfa samples_list.txt
+
+scp -r sfawcett@savio.berkeley.edu:/global/scratch/users/sfawcett/GetOrganelle/GFA_Files ~/Desktop/GFA_Files
+
+### Use best Assemblies for single folder of FASTA files
+
+#!/usr/bin/env bash
+# run from: /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleOutput/
+
+OUTDIR=/global/scratch/users/sfawcett/GetOrganelle/GetOrganelleAssemblies
+mkdir -p "$OUTDIR"
+MAPFILE="$OUTDIR/fasta_name_mapping.txt"
+echo -e "old_name\tnew_name" > "$MAPFILE"
+
+for d in */ ; do
+    sample=$(basename "$d")
+    log="$d/get_org.log.txt"
+    [ -f "$log" ] || { echo "No log for $sample, skipping"; continue; }
+
+    # find the line that says "Writing GRAPH to ...selected_graph.gfa"
+    graph_line=$(grep "Writing GRAPH to" "$log")
+    # extract path number from the line before it (the last PATH written)
+    # assuming PATH lines appear right before GRAPH line
+    path_line_num=$(grep -n "Writing PATH" "$log" | tail -n1 | cut -d: -f1)
+    path_file=$(sed -n "${path_line_num}p" "$log" | awk '{print $NF}')
+
+    if [ ! -f "$path_file" ]; then
+        echo "Selected path not found for $sample, skipping"
+        continue
+    fi
+
+    # copy to new directory with folder name
+    new_fasta="$OUTDIR/${sample}.fasta"
+    cp "$path_file" "$new_fasta"
+
+    # record mapping
+    echo -e "$(basename "$path_file")\t${sample}.fasta" >> "$MAPFILE"
+done
+
+Selected path not found for BGB668_DUBAUTIApauciflorula, skipping
+No log for PWBH925_DUBAUTIAlinearisLIN, skipping
+
+These two appear to have failed.
+
+cat /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleAssemblies/*.fasta > /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleAssemblies/GetOrganellePlastomes.fasta
+
+
+
 
 
 
