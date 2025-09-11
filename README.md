@@ -205,24 +205,23 @@ Venegesia carpesioides was used as a seed, default settings for embryophyta were
     echo -e "$(basename "$path_file")\t${sample}.fasta" >> "$MAPFILE"
     done
 
-#### Selected path not found for BGB668_DUBAUTIApauciflorula, skipping
-#### No log for PWBH925_DUBAUTIAlinearisLIN, skipping
-
-#### These two appear to have failed.
+#### Errors or poor sequences resulted in no assemblies for:
+    BGB668_DUBAUTIApauciflorula
+    PWBH925_DUBAUTIAlinearisLIN
 
 #### Samples removed for non-circular plastomes, low sequence length, etc.
 
-BGB667_DUBAUTIAimbricataIMB.fasta  	26	1061   
-BGB603_JENSIAyosemitana.fasta      	2 	108195 
-GetOrganellePlastomes.fasta        	18	151864 
-BGB675_DUBAUTIAlatifolia.fasta     	3 	18369  
-BGB509b_KYHOSIAbolanderi.fasta     	2 	18390  
-BGB664_DUBAUTIAreticulata.fasta    	2 	18393  
-BGB538_DEINANDRApentactis.fasta    	1 	189069 
-BGB670_DUBAUTIAraillardioides.fasta	22	2506   
-KNFGsn1982_DUBAUTIAlinearisLIN.fast	12	3226   
-BGB662_DUBAUTIAlaxaLAX.fasta       	34	670    
-BGB1231_DEINANDRApaniculataCRU.fast	4 	9476   
+    BGB667_DUBAUTIAimbricataIMB.fasta  	26	1061   
+    BGB603_JENSIAyosemitana.fasta      	2 	108195 
+    GetOrganellePlastomes.fasta        	18	151864 
+    BGB675_DUBAUTIAlatifolia.fasta     	3 	18369  
+    BGB509b_KYHOSIAbolanderi.fasta     	2 	18390  
+    BGB664_DUBAUTIAreticulata.fasta    	2 	18393  
+    BGB538_DEINANDRApentactis.fasta    	1 	189069 
+    BGB670_DUBAUTIAraillardioides.fasta	22	2506   
+    KNFGsn1982_DUBAUTIAlinearisLIN.fast	12	3226   
+    BGB662_DUBAUTIAlaxaLAX.fasta       	34	670    
+    BGB1231_DEINANDRApaniculataCRU.fast	4 	9476   
 
 
   
