@@ -5,35 +5,35 @@ See https://github.com/JonasMendez/SORTER2 for tutorials and detailed explanatio
 
 ### List of Jonas Mendez-Reneau scripts
 
-SORTER2_FormatReads.py
-SORTER2_HaplOMiner.py
-SORTER2_Processor.py
-SORTER2_ProgenitorProcessor.py
-SORTER2_Stage1A_TrimSPAdes.py
-SORTER2_Stage1B_AssembleOrthologs.py
-SORTER2_Stage2_PhaseOrthologs.py
-SORTER2_Stage3_PhaseHybrids.py
-example_shell.sh
+    SORTER2_FormatReads.py
+    SORTER2_HaplOMiner.py
+    SORTER2_Processor.py
+    SORTER2_ProgenitorProcessor.py
+    SORTER2_Stage1A_TrimSPAdes.py
+    SORTER2_Stage1B_AssembleOrthologs.py
+    SORTER2_Stage2_PhaseOrthologs.py
+    SORTER2_Stage3_PhaseHybrids.py
+    example_shell.sh
 
 ### List of our Modified Scripts
 
-1a.py
-1b_pre_mafft.py 
-1b_mafft.py  
-1b_post_mafft.py  
-2pre_bwa.py   
-2bwa.py
-2post_bwa.py
-2end_mafft.py
-3pre_mafft.py
-3mafft.py
-3post_mafft.py
-hap1.py
-hap2.py
+    1a.py
+    1b_pre_mafft.py 
+    1b_mafft.py  
+    1b_post_mafft.py  
+    2pre_bwa.py   
+    2bwa.py
+    2post_bwa.py
+    2end_mafft.py
+    3pre_mafft.py
+    3mafft.py
+    3post_mafft.py
+    hap1.py
+    hap2.py
 
-proc_snps.py
-proc1.py
-proc2.py
+    proc_snps.py
+    proc1.py
+    proc2.py
 
 ### Install SORTER2
     wget https://raw.githubusercontent.com/JonasMendez/SORTER2/refs/heads/main/SORTER2.yml
