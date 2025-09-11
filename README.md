@@ -213,9 +213,19 @@ These two appear to have failed.
 
 cat /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleAssemblies/*.fasta > /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleAssemblies/GetOrganellePlastomes.fasta
 
+Samples removed for non-circular plastomes, low sequence length, etc.
 
-
-
+BGB667_DUBAUTIAimbricataIMB.fasta  	26	1061   
+BGB603_JENSIAyosemitana.fasta      	2 	108195 
+GetOrganellePlastomes.fasta        	18	151864 
+BGB675_DUBAUTIAlatifolia.fasta     	3 	18369  
+BGB509b_KYHOSIAbolanderi.fasta     	2 	18390  
+BGB664_DUBAUTIAreticulata.fasta    	2 	18393  
+BGB538_DEINANDRApentactis.fasta    	1 	189069 
+BGB670_DUBAUTIAraillardioides.fasta	22	2506   
+KNFGsn1982_DUBAUTIAlinearisLIN.fast	12	3226   
+BGB662_DUBAUTIAlaxaLAX.fasta       	34	670    
+BGB1231_DEINANDRApaniculataCRU.fast	4 	9476   
 
 
   
