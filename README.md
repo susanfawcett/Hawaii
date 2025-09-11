@@ -223,6 +223,12 @@ Venegesia carpesioides was used as a seed, default settings for embryophyta were
     BGB662_DUBAUTIAlaxaLAX.fasta       	34	670    
     BGB1231_DEINANDRApaniculataCRU.fast	4 	9476   
 
+#### Rewrite fasta headers to match file names from SubsetGetOrganelleAssemblies directory
+
+    for f in *.fasta; do base=$(basename "$f" .fasta); awk -v name="$base" '/^>/{print ">"name; next} {print}' "$f" > tmp && mv tmp "$f"; done
+
+
+
 
   
   
