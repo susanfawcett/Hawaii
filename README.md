@@ -118,6 +118,8 @@ Batch script IQTreeLouluPlastome.bat
 ### Run SORTER2 Stage 1B
 Broken into three steps to faciliate multithreading on Savio
 
+
+
 ## Extracting plastomes from WGS sequences using GetOrganelle
 ### Input csv file formatted into three columns with existing filename | collection ID | taxon
     python SORTER2_FormatReads.py -i ArborWGSMadieae.csv
@@ -140,35 +142,6 @@ See shell script getorganelle.sh
 Jian-Jun Jin*, Wen-Bin Yu*, Jun-Bo Yang, Yu Song, Claude W. dePamphilis, Ting-Shuang Yi, De-Zhu Li. GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes. Genome Biology 21, 241 (2020). https://doi.org/10.1186/s13059-020-02154-5
 
 Venegesia carpesioides was used as a seed, default settings for embryophyta were used.
-
-### Export gfa files to inspect in Bandage
-#### Go to the output directory
-    cd /global/scratch/users/sfawcett/GetOrganelle/GetOrganelleOutput
-
-#### Make a folder for renamed GFA files
-    mkdir -p ../GFA_Files
-
-#### Copy and rename GFAs + add a comment with the sample name inside
-    for d in */; do
-        sample=$(basename "$d")
-        gfa=$(find "$d" -maxdepth 1 -name "*.gfa" | head -n 1)
-        if [[ -n "$gfa" ]]; then
-            # Copy with new name
-            cp "$gfa" "../GFA_Files/${sample}.gfa"
-            # Add sample name as first line in the GFA
-            sed -i "1i# Sample: ${sample}" "../GFA_Files/${sample}.gfa"
-            # Append to samples list
-            echo "$sample" >> ../GFA_Files/samples_list.txt
-        fi
-    done
-
-#### Move to the GFA folder
-    cd ../GFA_Files
-
-#### Zip everything up into one archive
-    tar -czf ../GFA_Files.tar.gz *.gfa samples_list.txt
-
-    scp -r sfawcett@savio.berkeley.edu:/global/scratch/users/sfawcett/GetOrganelle/GFA_Files ~/Desktop/GFA_Files
 
 #### Use best Assemblies for single folder of FASTA files
     #!/usr/bin/env bash
@@ -228,6 +201,9 @@ Venegesia carpesioides was used as a seed, default settings for embryophyta were
 
 #### Concatenate for Mafft
     cat *.fasta > /global/scratch/users/sfawcett/GetOrganelle/SubsetGetOrganelleAssemblies/SubsetGetOrganellePlastomes.fasta
+
+#### Align sequences manually in Geneious 
+    
 
 
 
