@@ -104,6 +104,7 @@ Designating the trimmed paired end reads output from SORTER2 stage 1A, and the r
 
 #### Align assemblies to the reference using Mafft
 Batch script MafftPritchardiaPlastome.bat
+
     mafft --thread 40 --auto --keeplength --add "$ASSEMBLY" "$REFERENCE" > "$OUTPUT_DIR/aligned_plastomes.fasta"
 
 #### Remove sequences with less than 50% reference coverage
@@ -114,12 +115,16 @@ Batch script MafftPritchardiaPlastome.bat
 
 #### TrimAL was used to generate final alignments
 For _Pritchardia_
+
     trimal -in trimmed_alignment_50percent.fasta -out trimmed_strictplus.fasta -strictplus 
+    
 For _Lysimachia_
+
     trimal -in trimmed_alignment_50percent.fasta -out trimmed_alignment_gappyout.fasta -gappyout 
 
 #### Plastome Phylogenies were inferred using IQTree
 Batch script IQTreeLouluPlastome.bat
+
       iqtree3 -s $ALIGNMENT_FILE -m TEST -bb 1000 -T AUTO -safe --prefix louluplastome
 
 ### Run SORTER2 Stage 1B
