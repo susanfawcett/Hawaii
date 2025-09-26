@@ -41,6 +41,8 @@ See https://github.com/JonasMendez/SORTER2 for tutorials and detailed explanatio
 ### Prepare paired read files and CSV to run python script 
     SORTER2_FormatReads.py
 
+    example: Pritchardia_waialealeana___Kauai_Horn_4950_ILM166_R1.fastq,Horn4950Kauai,Pri.waialealeana
+
 #### Rename files ending in .fq with .fastq 
     for f in *.fq; do
         mv "$f" "${f/.fq/.fastq}"
@@ -76,6 +78,11 @@ source /path/to/directory/miniconda3/etc/profile.d/conda.sh
 Note: Include path to a single master version of python scripts. All necessary file names and other changes can be made to batch scripts for each project using the pipeline.
 Batch script 
     python /path/to/directory/bin/1a.py -n Projectname -trim T -spades T
+
+### Run SORTER2 Stage 1B
+
+
+
 
 ### Use Hapl-O-Miner to assemble off-target reads to reference plastome
 #### Reference plastomes were used for _Pritchardia pacifica_, NCBI reference NC_067842.1 and _Lysimachia clethroides_, NCBI reference  NC_064345.1, downloaded from GenBank.
