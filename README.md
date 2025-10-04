@@ -122,6 +122,10 @@ For _Lysimachia_
 
     trimal -in trimmed_alignment_50percent.fasta -out trimmed_alignment_gappyout.fasta -gappyout 
 
+For _Geniostoma_ 99.99% average coverage, one sequence removed for failure Gen.tinifoliumtin_OppenheimerH62005Maui
+
+    
+
 #### Plastome Phylogenies were inferred using IQTree
 Batch script IQTreeLouluPlastome.bat
 
