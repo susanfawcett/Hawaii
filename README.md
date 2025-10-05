@@ -218,7 +218,28 @@ Venegesia carpesioides was used as a seed, default settings for embryophyta were
 #### Concatenate for Mafft
     cat *.fasta > /global/scratch/users/sfawcett/GetOrganelle/SubsetGetOrganelleAssemblies/SubsetGetOrganellePlastomes.fasta
 
-#### Align sequences manually in Geneious 
+#### Assess sequences manually in Geneious 
+
+Erroneous base calling in Haplominer introduced directional bias resulting in artefactual similarity reflecting method rather than phylogenetic relationships. The BAM and FASTA files from the Haplominer assembly were used to filter and mask plastomes at 10x coverage for further comparison with GetOrganelle results.
+
+See /global/scratch/users/sfawcett/Haplominer/Madieae/MaskAlign10x.bat
+
+#### 
+
+
+
+## Analyses of Nuclear data for Madieae
+#### Combine HybPhaser exon only phased AMA_ASC phylogeny with diploids
+
+    mkdir -p MergedSwordsDiploids
+
+    for f in out_align_exons_192/*.fasta; do
+        fname=$(basename "$f")
+        cat "$f" Silversword_AMA_ASC/"$fname" 2>/dev/null > MergedSwordsDiploids/"$fname"
+    done
+
+
+    
     
 
 
