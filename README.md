@@ -220,9 +220,11 @@ Venegesia carpesioides was used as a seed, default settings for embryophyta were
 
 #### Assess sequences manually in Geneious 
 
-Erroneous base calling in Haplominer introduced directional bias resulting in artefactual similarity reflecting method rather than phylogenetic relationships. The BAM and FASTA files from the Haplominer assembly were used to filter and mask plastomes at 10x coverage for further comparison with GetOrganelle results.
+Erroneous base calling in Haplominer introduced directional bias resulting in artefactual similarity reflecting method rather than phylogenetic relationships. The BAM and FASTA files from the Haplominer assembly were used to filter and mask plastomes at 10x coverage for further comparison with GetOrganelle results, and aligned using Mafft.
 
 See /global/scratch/users/sfawcett/Haplominer/Madieae/MaskAlign10x.bat
+
+
 
 #### 
 
