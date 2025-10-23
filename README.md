@@ -1,5 +1,9 @@
 ## Pipelines for the analyses of targeted enrichment data for Hawaiian Angiosperm Lineages
 
+### HybPiper used for assemblies
+Following tutorials on https://github.com/mossmatters/HybPiper
+
+
 We include modified versions of scripts published by Jonas Mendez-Reneau, using SORTER2, and other tools.
 See https://github.com/JonasMendez/SORTER2 for tutorials and detailed explanations. Scripts are modified to take advantage of multi-threading where possible, in a linux environment on UC Berkeley's Savio computing cluster. https://research-it.berkeley.edu/services-projects/high-performance-computing-savio
 
