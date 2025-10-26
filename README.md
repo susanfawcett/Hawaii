@@ -1,7 +1,14 @@
 ## Pipelines for the analyses of targeted enrichment data for Hawaiian Angiosperm Lineages
 
-### HybPiper used for assemblies
+### HybPiper used for nuclear assemblies
 Following tutorials on https://github.com/mossmatters/HybPiper
+
+    hybpiper retrieve_sequences dna -t_dna mega353.fasta --sample_names namelist.txt --fasta_dir loulufastas
+
+    adapters trimmed using XXXXXX
+
+    hybpiper check_targetfile and fix_targetfile
+
 
 
 We include modified versions of scripts published by Jonas Mendez-Reneau, using SORTER2, and other tools.
