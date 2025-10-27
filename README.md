@@ -135,6 +135,10 @@ For _Lysimachia_
 
 For _Geniostoma_ 99.99% average coverage, one sequence removed for failure Gen.tinifoliumtin_OppenheimerH62005Maui
 
+#### Plastomes trimmed to 10x coverage using custom script
+
+For _Pritchardia_
+see Trim10x.bat
     
 
 #### Plastome Phylogenies were inferred using IQTree
