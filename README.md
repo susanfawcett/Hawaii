@@ -3,8 +3,6 @@
 ### HybPiper used for nuclear assemblies
 Following tutorials on https://github.com/mossmatters/HybPiper
 
-    !!!hybpiper retrieve_sequences dna -t_dna mega353.fasta --sample_names namelist.txt --fasta_dir loulufastas
-
     adapters trimmed using fastp
 
 The check_targetfile function was used in a batch script
@@ -15,6 +13,31 @@ The fixed targetfile was generated, reducing the mega353.fasta targetfile with 9
 
 The nuclear sequences were assembled using
     HybAssemble.bat
+
+The sequences were retrieved and reorganized into folders by locus
+    hybpiper retrieve_sequences dna \
+  -t_dna mega353_fixed.fasta \
+  --sample_names namelist.txt \
+  --fasta_dir ../LouluNuclearFastas
+
+Loci were then aligned using Mafft 
+    see AlignLoulu.bat
+
+
+Alignments were trimmed using TrimAl
+
+
+IQ-Tree was used for generating individual gene trees and phylogenetic analysis
+
+
+ASTRAL was used for mutlispecies coalescent analysis
+
+
+
+
+
+
+
 
 
 
