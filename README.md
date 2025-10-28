@@ -3,14 +3,18 @@
 ### HybPiper used for nuclear assemblies
 Following tutorials on https://github.com/mossmatters/HybPiper
 
-    hybpiper retrieve_sequences dna -t_dna mega353.fasta --sample_names namelist.txt --fasta_dir loulufastas
+    !!!hybpiper retrieve_sequences dna -t_dna mega353.fasta --sample_names namelist.txt --fasta_dir loulufastas
 
-    adapters trimmed using XXXXXX
+    adapters trimmed using fastp
 
 The check_targetfile function was used in a batch script
     Check_Targets.bat
+    
 The fixed targetfile was generated, reducing the mega353.fasta targetfile with 98786 sequences to the mega353_fixed target file with 97303 sequences.
     hybpiper fix_targetfile --targetfile_dna mega353.fasta fix_targetfile_2025-10-26-23_56_26.ctl --allow_gene_removal
+
+The nuclear sequences were assembled using
+    HybAssemble.bat
 
 
 
