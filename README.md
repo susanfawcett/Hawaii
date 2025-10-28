@@ -7,7 +7,12 @@ Following tutorials on https://github.com/mossmatters/HybPiper
 
     adapters trimmed using XXXXXX
 
-    hybpiper check_targetfile and fix_targetfile
+The check_targetfile function was used in a batch script
+    Check_Targets.bat
+The fixed targetfile was generated, reducing the mega353.fasta targetfile with 98786 sequences to the mega353_fixed target file with 97303 sequences.
+    hybpiper fix_targetfile --targetfile_dna mega353.fasta fix_targetfile_2025-10-26-23_56_26.ctl --allow_gene_removal
+
+
 
 
 
@@ -135,10 +140,15 @@ For _Lysimachia_
 
 For _Geniostoma_ 99.99% average coverage, one sequence removed for failure Gen.tinifoliumtin_OppenheimerH62005Maui
 
-#### Plastomes trimmed to 10x coverage using custom script
+#### Plastomes trimmed to bases with 10x coverage using custom script
 
-For _Pritchardia_
-see Trim10x.bat
+For _Pritchardia_ the plastome extraced by Haplominer was filtered to use base with 10x coverage
+see TrimPlastome10x.bat
+
+The filtered dataset was aligned using Mafft
+see XXXXXXXX.bat
+
+
     
 
 #### Plastome Phylogenies were inferred using IQTree
