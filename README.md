@@ -31,7 +31,11 @@ Loci were then aligned using Mafft
 
 Alignments were trimmed using TrimAl
 
-    Savio Scratch melts down...
+    TrimLouluAlignments.bat
+
+Problematic samples Pri.sp_ManWR01Midway Pri.lanigera_Wood7611Hawaii were removed
+
+
 
 IQ-Tree was used for generating individual gene trees and phylogenetic analysis
 
