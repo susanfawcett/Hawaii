@@ -21,9 +21,39 @@ The nuclear sequences were assembled using
 
     HybAssemble.bat
 
-The sequences were retrieved and reorganized into folders by locus
+Assemblies were evaluated using the heatmap and summary statistics
+
+    hybpiper stats -t_dna mega353_fixed.fasta gene kamakahalanamelist.txt
+    hybpiper recovery_heatmap seq_lengths.tsv
+
+Those with poor sequence recovery (fewer than 200,000 bases recovered and fewer than 100 genes with 75% coverage) were identified for removal
+
+    Gen.tinifolium_OppenheimerH62116Maui
+    Gen.imadae_Wood15770Kauai
+    Gen.tinifolium_Degener10878Hawaii
+    Gen.cyrtandrae_Wood5908Oahu
+    Gen.hedyosmifolium_OppenheimerH60907Molokai
+    Gen.hosakanum_Wood5874Oahu
+
+    Pri.sp_ManWR01Midway
+    Pri.beccariana_Hodel147Hawaii
+
+    for f in *.fasta; do
+    seqkit grep -v -r \
+        -p "Pri.sp_ManWR01Midway" \
+        -p "Pri.beccariana_Hodel147Hawaii" \
+        "$f" > tmp && mv tmp "$f"
+    done
+
+
+The exon only sequences were retrieved and reorganized into folders by locus
 
     hybpiper retrieve_sequences dna -t_dna mega353_fixed.fasta --sample_names namelist.txt --fasta_dir ../LouluNuclearFastas
+
+The supercontigs were recovered and organized by locus
+
+    hybpiper retrieve_sequences supercontig -t_dna /global/scratch/users/sfawcett/HybPiper/mega353_fixed.fasta --sample_names         /global/scratch/users/sfawcett/HybPiper/kamakahalanamelist.txt     --fasta_dir /global/scratch/users/sfawcett/HybPiper/Kamakahala_Data/kamakahala_supercontigs 
+    hybpiper retrieve_sequences supercontig -t_dna mega353_fixed.fasta --sample_names namelist.txt --fasta_dir ../LouluSuperContigs
 
 Loci were then aligned using Mafft 
 
