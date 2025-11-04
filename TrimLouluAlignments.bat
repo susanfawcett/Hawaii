@@ -8,41 +8,53 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 
-
-echo "=== SLURM job starting ==="
-date
-
 module load anaconda3
 source /global/home/users/sfawcett/miniconda3/etc/profile.d/conda.sh
 conda activate hybpiper
 
-echo "Conda env: $CONDA_DEFAULT_ENV"
-echo "trimal is at:" $(which trimal)
-trimal -h | head -n 3
-
-WORKDIR=/global/scratch/users/sfawcett/HybPiper/Loulu_Data/LouluNuclearFastas/AlignedFastas
-OUTDIR=/global/scratch/users/sfawcett/HybPiper/Loulu_Data/LouluNuclearFastas/TrimmedAlignedFastas
+WORKDIR=/global/scratch/users/sfawcett/HybPiper/Loulu_Data/LouluSuperContigs/AlignedSuperContigs
+OUTDIR=/global/scratch/users/sfawcett/HybPiper/Loulu_Data/LouluSuperContigs/TrimmedAlignedSuperContigs
 mkdir -p "$OUTDIR"
 
-echo "Files in WORKDIR:"
-ls -l "$WORKDIR"
-
-# --- Environment ---
-module load anaconda3
-source /global/home/users/sfawcett/miniconda3/etc/profile.d/conda.sh
-conda activate hybpiper
-
 TRIMAL=/global/home/users/sfawcett/miniconda3/envs/hybpiper/bin/trimal
-echo "Using trimAl: $TRIMAL"
-$TRIMAL -h | head -n 3
+LOGFILE="$OUTDIR/trim_report.tsv"
+
+# Header for report
+echo -e "Locus\tOriginalLength\tTrimmedLength\tRemovedSequences\tTrimAlCriteria" > "$LOGFILE"
 
 cd "$WORKDIR"
 
 for f in *_aln.fasta; do
     base=$(basename "$f" _aln.fasta)
-    echo "Trimming $f ..."
-    $TRIMAL -in "$f" -out "$OUTDIR/${base}_trim.fasta" -automated1 || { echo "ERROR: trimal failed on $f"; exit 1; }
+    tmp_upper="$OUTDIR/${base}_UPPER.tmp"
+    out="$OUTDIR/${base}_trim.fasta"
+
+    # Uppercase sequences
+    awk '{
+        if ($0 ~ /^>/) print $0;
+        else print toupper($0);
+    }' "$f" > "$tmp_upper"
+
+    # Original alignment length (number of columns)
+    ORIG_LEN=$(grep -v '^>' "$tmp_upper" | awk '{print length}' | head -n 1)
+
+    # Run trimAl, capture warnings
+    WARNINGS=$($TRIMAL -in "$tmp_upper" -out "$out" -automated1 2>&1 | grep "composed only by gaps" | sed 's/WARNING: Removing sequence //')
+
+    # Trimmed alignment length
+    TRIM_LEN=$(grep -v '^>' "$out" | awk '{print length}' | head -n 1)
+
+    # Record locus, lengths, removed sequences, criteria
+    if [ -n "$WARNINGS" ]; then
+        REMOVED="$WARNINGS"
+    else
+        REMOVED="None"
+    fi
+
+    echo -e "${base}\t${ORIG_LEN}\t${TRIM_LEN}\t${REMOVED}\t-automated1" >> "$LOGFILE"
+
+    rm "$tmp_upper"
 done
 
-echo "=== All trimAl operations complete ==="
-date
+echo "Done. Full trimming report saved in $LOGFILE"
+
