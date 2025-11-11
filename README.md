@@ -26,7 +26,7 @@ Assemblies were evaluated using the heatmap and summary statistics
     hybpiper stats -t_dna mega353_fixed.fasta gene kamakahalanamelist.txt
     hybpiper recovery_heatmap seq_lengths.tsv
 
-Those with poor sequence recovery (fewer than 200,000 bases recovered and fewer than 100 genes with 75% coverage) were identified for removal
+Those with poor sequence recovery (fewer than 200,000 bases recovered and fewer than 100 genes with 75% coverage) or extremely long branches (Pri.lanigera_Wood7611Hawaii; Gen.hedyosmifolium_Wood13728Maui) were identified for removal
 
     Gen.tinifolium_OppenheimerH62116Maui
     Gen.imadae_Wood15770Kauai
@@ -65,7 +65,29 @@ Alignments were trimmed using TrimAl
 
 Problematic samples Pri.sp_ManWR01Midway Pri.lanigera_Wood7611Hawaii were removed
 
+Loci with fewer than 40 (of 57) taxa were removed from Geniostoma
 
+    mkdir -p /global/scratch/users/sfawcett/HybPiper/Kamakahala_Data/removed_loci
+
+
+    for f in *.fasta; do
+        # Count number of sequences (taxa)
+        n=$(grep -c "^>" "$f")
+    
+    # If fewer than 40 sequences, move and print
+    if [ "$n" -lt 40 ]; then
+        mv "$f" /global/scratch/users/sfawcett/HybPiper/Kamakahala_Data/removed_loci/
+        echo "Removed $f ($n taxa)"
+    fi
+    done
+
+    Removed 5032_trim.fasta (39 taxa)
+    Removed 5296_trim.fasta (36 taxa)
+    Removed 6430_trim.fasta (17 taxa)
+    Removed 6514_trim.fasta (12 taxa)
+    Removed 6557_trim.fasta (2 taxa)
+    Removed 7013_trim.fasta (38 taxa)
+    Removed 7602_trim.fasta (1 taxa)
 
 IQ-Tree was used for generating individual gene trees and phylogenetic analysis
 
@@ -329,12 +351,33 @@ These were then aligned with the GetOrganelle plastomes, which were more complet
     
     
 
+## SNP Analyses using GATK following methdods in Slimp et al. 2021
+#### Build a Referece using the longest contig from each locus
 
+	# Set directories
+	SRC=/global/scratch/users/sfawcett/HybPiper/Loulu_Data/LouluSuperContigs/realigncleantrimmedalignedfastas
+	OUT=/global/scratch/users/sfawcett/GATK/refs
+	TMP=/global/scratch/users/sfawcett/GATK/tmp
 
+	mkdir -p "$OUT" "$TMP" "$OUT/anchor"
 
+	echo "Building Pritchardia anchor reference..."
+	cd "$SRC"
 
-  
-  
+	# Loop through trimmed, aligned Loulu supercontigs
+	for f in *.fasta; do
+		[ -s "$f" ] || continue
+		locus=$(basename "$f" .fasta)
+		aln="$TMP/${locus}.aln.fasta"
+		cp "$f" "$aln"  # already aligned
+		# Trim gappy columns (>50% gaps removed)
+		trimal -in "$aln" -out "$TMP/${locus}.trim.fasta" -gt 0.5
+		# Extract the longest (best) sequence per locus
+		awk -v L="$locus" '
+			BEGIN{RS=">"; ORS=""; bestlen=-1}
+			NR>1{
+				split($0,a,"\n"); hdr=a[1]; s=""
+
 
 
 
